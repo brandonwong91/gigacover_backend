@@ -3,8 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
+#Cloud Host
 app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@customers.cwtj4hpdxres.us-east-2.rds.amazonaws.com/customers"
-    #"postgresql://postgres:postgres@localhost/customers"
+
+#Local Host
+#app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:postgres@localhost/customers"
 
 app.config['SECRET_KEY'] = "random string"
 
@@ -53,7 +56,8 @@ def create():
 @app.route('/youngest', methods=['GET', 'POST'])
 def youngest():
     if request.method == 'GET':
-        youngest_session = db.session.execute('SELECT * FROM customers ORDER BY dob DESC')
+        youngest_session = db.session.execute('SELECT * FROM customers WHERE (SELECT EXTRACT(YEAR FROM customers.dob))'
+                                              '=(SELECT EXTRACT(YEAR FROM MAX(customers.dob)) FROM customers)')
         return render_template('youngest.html', customers=youngest_session)
         #return render_template('youngest.html', customers=customers.query.order_by(customers.dob.desc()))
 
