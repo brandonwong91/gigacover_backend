@@ -14,7 +14,8 @@ To create a RESTful API with Python and postgres DB on a customer model and thei
       
 3.  Deployment on a Cloud Hosting Service:  
     I have chosen Amazon EC2 for a linux machine to deploy the app  
-    and also chosen Amazon RDB to start the postgres database too.  
+    and also chosen Amazon RDB to start the postgres database too.
+    Currently hosting at : http://18.222.127.78/
 
 ### Setting Up  
 1.  pip install requirements.txt - this will include all the required dependancies  
