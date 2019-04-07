@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang = "en">
+   <head>
+       <style>
+           table, th, td{
+            border: 1px solid black;
+           }
+       </style>
+   </head>
+   <body>
+      <h3>
+         <a href = "{{ url_for('show_all') }}">GigaCover Backend Assignment</a>
+      </h3>
+
+      <hr/>
+      {%- for message in get_flashed_messages() %}
+         {{ message }}
+      {%- endfor %}
+
+      <h3><a href = "{{url_for('create')}}">New Customer</a>
+      </h3>
+      <h3><a href = "{{url_for('delete')}}">Remove Customer</a>
+      </h3>
+      <h3><a href = "{{url_for('update')}}">Update Birthday</a>
+      </h3>
+      <h3><a href = "{{url_for('youngest')}}">Find out who's the youngest!</a>
+      </h3>
+      <h2>Customer List</h2>
+      <table>
+         <thead>
+            <tr>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Last Updated</th>
+            </tr>
+         </thead>
+
+         <tbody>
+            {% for customer in customers %}
+               <tr>
+                  <td>{{ customer.name }}</td>
+                  <td>{{ customer.dob }}</td>
+                  <td>{{ customer.updated_at }}</td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </body>
+</html>

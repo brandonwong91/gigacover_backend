@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+   <body>
+      <h3>
+         <a href = "{{ url_for('show_all') }}">GigaCover Backend Assignment</a>
+      </h3>
+      <hr/>
+
+      {%- for category, message in get_flashed_messages(with_categories = true) %}
+         <div class = "alert alert-danger">
+            {{ message }}
+         </div>
+      {%- endfor %}
+
+      <form action = "{{ request.path }}" method = "post">
+         Names :
+         <select name="update_name" size="1">
+            {% for customer in customers %}
+            <option value = "{{customer.name}}">{{ customer.name }}</option>
+            {% endfor %}
+         </select><br>
+         <label for = "birthday">Birthday (yyyy/mm/dd) : </label>
+         <input type = "text" name = "update_dob" placeholder = "Date of Birth" /><br>
+         <input type = "submit" value = "Submit" />
+      </form>
+   </body>
+</html>
